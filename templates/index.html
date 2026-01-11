@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <section id="screen1" class="screen active">
+        <div class="container">
+            <div class="hero">
+                <h1>Find Ontario Energy Incentives You Qualify For</h1>
+                <p class="subtitle">Discover rebates for heat pumps, solar, insulation, EV chargers, and more.</p>
+            </div>
+
+            <div class="form-card">
+                <form id="subsidyForm" action="/subsidies" method="get">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="homeType">Home Type</label>
+                            <select id="homeType" name="homeType">
+                                <option value="" selected>Select...</option>
+                                <option value="apartment">Apartment/Condo</option>
+                                <option value="detached">Detached</option>
+                                <option value="semi">Semi-Detached</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ownership">Own or Rent</label>
+                            <select id="ownership" name="ownership">
+                                <option value="" selected>Select...</option>
+                                <option value="own">Own</option>
+                                <option value="rent">Rent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Resource Type</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Heat">
+                                <span>Heat</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Insulation">
+                                <span>Insulation</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Solar">
+                                <span>Solar</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="EV Charger">
+                                <span>EV Charger</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Windows">
+                                <span>Windows</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Electricity">
+                                <span>Electricity</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Gas">
+                                <span>Gas</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Energy">
+                                <span>Energy</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">See My Eligible Subsidies</button>
+                    <button name="see_all" value="true" class="btn_light">See ALL Subsidies</button>
+                </form>
+            </div>
+            <div class="contractors-link" style="margin-top: 20px; text-align: center;">
+                <a href="{{ url_for('contractors') }}" class="btn-primary">See Our Contractors</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="screen2" class="screen">
+        <div class="container">
+            <div class="results-header">
+                <h1>Your Eligible Subsidies</h1>
+                <button id="backBtn" class="btn-secondary">← Back to Form</button>
+            </div>
+
+            <div id="resultsContainer" class="results-container">
+            </div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Full Description</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Eligibility Requirements</h3>
+                    <p id="modalEligibility"></p>
+                </div>
+                <div class="modal-section">
+                    <a href="#" class="btn-link" target="_blank">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

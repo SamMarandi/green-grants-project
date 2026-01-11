@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Our Contractors</h1>
+
+    <div class="filter-bar">
+        <button type="button" id="openFilter" class="btn_light">
+            Filter Contractors
+        </button>
+    </div>
+
+    <div id="filterModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <button type="button" class="filter-close" id="closeFilter">&times;</button>
+            <h2>Filter Contractors</h2>
+
+            <form method="get" action="/contractors">
+                    <div class="form-group">
+                        <label>Resource Type</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Heat">
+                                <span>Heat</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Insulation">
+                                <span>Insulation</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Solar">
+                                <span>Solar</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="EV Charger">
+                                <span>EV Charger</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Windows">
+                                <span>Windows</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Electricity">
+                                <span>Electricity</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Gas">
+                                <span>Gas</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="type" value="Energy">
+                                <span>Energy</span>
+                            </label>
+                        </div>
+                    </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn-primary">Apply Filters</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if filters and filters.types %}
+        <div class="filters">
+            <strong>Filters:</strong>
+            {% if filters.types %}<span> Types: {{ filters.types|join(', ') }}</span>{% endif %}
+        </div>
+    {% endif %}
+
+    <div class="contractor-list">
+        {% for contractor in contractors %}
+            <div class="contractor-card">
+                <h2>{{ contractor.name }}</h2>
+                <p>Specialty: {{ contractor.specialty }}</p>
+                <p>Location: {{ contractor.location }}</p>
+                <p>Email: <a href="mailto:{{ contractor.email }}">{{ contractor.email }}</a></p>
+                <p>Phone: <a href="tel:{{ contractor.phone }}">{{ contractor.phone }}</a></p>
+                {% if contractor.link %}
+                    <p>Website: <a href="{{ contractor.link }}" target="_blank">{{ contractor.link }}</a></p>
+                {% endif %}
+                {% if contractor.notes %}
+                    <p>Notes: {{ contractor.notes }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %}

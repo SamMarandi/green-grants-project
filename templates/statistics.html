@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<div class="container">
+    <h1>Statistics</h1>
+
+
+    <!-- CO2 Bar -->
+    <div class="co2-bar">
+        <div class="co2-bar-fill" style="width: 70%;"></div>
+    </div>
+
+
+    <div class="co2-bar-label">Estimated CO₂ avoided: {{ stats.total_co2 }} tons/year</div>
+
+
+    <!-- Text Stats -->
+    <div class="stat-text-container">
+    <div class="stat-box">
+        <p>{{ stats.heat_pump_reduction }}</p>
+    </div>
+    <div class="stat-box">
+        <p>{{ stats.ontario_impact }}</p>
+    </div>
+    <div class="stat-box">
+        <p>{{ stats.heat_pump_amount }}</p>
+    </div>
+    <div class="stat-box">
+        <p>{{ stats.saving }}</p>
+    </div>
+    <div class="stat-box">
+        <p>{{ stats.efficient }}</p>
+    </div>
+</div>
+
+
+</div>
+{% endblock %}
+
+

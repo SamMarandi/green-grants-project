@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>GreenGrants - Ontario Subsidy Finder</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="static/style.css">
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-item" style="display: inline-block; vertical-align: middle;">
+                <a href="/" style="text-decoration: none;">
+                    <div class="nav-brand">🌱 GreenGrants</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/" class="nav-item">Home</a>
+            </div>
+            <div class="nav-item">
+                <a href="/subsidies?see_all=true" class="nav-item">Subsidies</a>
+            </div>
+            <div class="nav-item">
+                <a href="/contractors" class="nav-item">Contractors</a>
+            </div>
+            <div class="nav-item">
+                <a href="/statistics" class="nav-item">Stats</a>
+            </div>
+        </nav>
+        {% block body %}
+
+        {% endblock %}
+        <footer>
+            <div class="footer">
+                <p style="margin: 5px; color: #409443"><a style="color: #409443" href="/">Homepage</a> | <a style="color: #409443" href="/subsidies?see_all=true">Subsidies Page</a> | <a style="color: #409443" href="/contractors">Contractors Page</a></p>
+                <p style="margin: 10px;">&copy; Hack The World 2025 | A.Mahdavi, S.Marandi, E.Perez, C.Jurki | All rights reserved.</p>
+            </div>
+        </footer>
+    </body>

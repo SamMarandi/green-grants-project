@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="container">
+    <div class="hero">
+      <h1>
+        {% if see_all == 'true' %}
+          All Subsidies
+        {% else %}
+          Your Eligible Subsidies
+        {% endif %}
+      </h1>
+    </div>
+
+    {% if filters and (filters.home_type or filters.ownership or filters.types) %}
+      <div class="filters">
+        <strong>Filters:</strong>
+        {% if filters.home_type %}<span> Home: {{ filters.home_type }}</span>{% endif %}
+        {% if filters.ownership %}<span> Ownership: {{ filters.ownership }}</span>{% endif %}
+        {% if filters.types %}<span> Types: {{ filters.types|join(', ') }}</span>{% endif %}
+      </div>
+    {% endif %}
+
+    {% if subsidies and subsidies|length > 0 %}
+      <div class="results-grid">
+        {% for sub in subsidies %}
+          <div class="card subsidy-card">
+            <h2>{{ sub['name'] }}</h2>
+            <p class="description">{{ sub['description'] }}</p>
+            <p><strong>Type:</strong> {{ sub['resource_type'] }}</p>
+            <p><strong>Eligible Income:</strong> {{ sub['income_eligibility'] if 'income_eligibility' in sub else 'Visit Site' }}</p>
+            <p><strong>Website:</strong> {% if sub['link'] %} <a class="btn-link" href="{{ sub['link'] }}" target="_blank">{{ sub['name'] }}</a>{% endif %}</p>
+            <p><strong>Steps:</strong></p>
+            {% if sub['steps'] %}
+            <details class="steps_toggle">
+                <summary>View Steps to Apply</summary>
+                <ul>
+                {% for line in sub['steps'].split('\n') %}
+                    {% if line.strip() %}
+                      <li>{{ line }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </details>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No subsidies found for the selected options.</p>
+      <a class="btn-secondary" href="/">Back to search</a>
+    {% endif %}
+  </div>
+{% endblock %}
